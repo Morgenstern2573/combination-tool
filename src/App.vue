@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 import { ref } from 'vue'
 
 const seeds = reactive([])
+const seedCopy = ref([])
 const newSeed = ref('')
 const combinationLimit = ref(0)
 const ideas = ref([])
@@ -54,7 +55,8 @@ const createIdeas = function (e) {
   if (seeds.length < 2) {
     return
   }
-
+  ideas.value = []
+  seedCopy.value = Array.from(seeds)
   ideas.value = generateCombinations()
 }
 </script>
@@ -130,7 +132,7 @@ const createIdeas = function (e) {
           v-for="(el, ind) in idea"
           :key="el+ind+idea"
         >
-          {{ seeds[el] }},
+          {{ seedCopy[el] }},
         </span>
       </p>
     </div>
