@@ -5,6 +5,7 @@ import { ref } from 'vue'
 const seeds = reactive([])
 const newSeed = ref('')
 const combinationLimit = ref(0)
+const ideas = ref([])
 
 const addSeed = function (e) {
   e.preventDefault()
@@ -19,6 +20,42 @@ const addSeed = function (e) {
 
 const removeSeed = function (ind) {
   seeds.splice(ind, 1)
+}
+
+const generateCombinations = function () {
+  console.log('combining')
+  
+  const res = []
+
+  function backtrack(start, comb) {
+    console.log('backtracking!')
+    if (comb.length === combinationLimit.value) {
+      console.log('base case')
+      res.push(Array.from(comb));
+      return
+    }
+
+    for (let i = start; i < seeds.length; i++) {
+      comb.push(i);
+      backtrack(i +1, comb);
+      comb.pop();
+    }
+  }
+
+  backtrack(0, []);
+
+  console.log(res)
+  return res;
+}
+
+const createIdeas = function (e) {
+  e.preventDefault();
+
+  if (seeds.length < 2) {
+    return
+  }
+
+  ideas.value = generateCombinations()
 }
 </script>
 
@@ -46,7 +83,7 @@ const removeSeed = function (ind) {
     </button>
   </form>
 
-  <div class="py-2">
+  <div class="py-2 mb-4">
     <span 
       v-for="(el, ind) in seeds" :key="ind"
       class="rounded-full border px-5 py-1"
@@ -83,6 +120,20 @@ const removeSeed = function (ind) {
 
   <div>
     <h2>Ideas</h2>
+
+    <div>
+      <p 
+        v-for="(idea, ind) in ideas" 
+        :key="ind+idea"
+      >
+        <span 
+          v-for="(el, ind) in idea"
+          :key="el+ind+idea"
+        >
+          {{ seeds[el] }},
+        </span>
+      </p>
+    </div>
   </div>
 </div>
 </template>
