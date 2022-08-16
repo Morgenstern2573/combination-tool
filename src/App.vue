@@ -1,26 +1,30 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+<script setup>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
 </script>
 
+<template>
+<div>
+  <h1>Brainstorm</h1>
+
+  <form>
+    <input type="text" name="" id="">
+    <button>Add idea</button>
+  </form>
+
+  <div>
+    idea badges
+  </div>
+
+  <form>
+    <input type="number">
+    <button>Brainstorm</button>
+  </form>
+
+  <div>
+    results
+  </div>
+</div>
+</template>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
